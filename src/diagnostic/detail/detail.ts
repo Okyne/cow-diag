@@ -17,7 +17,8 @@ export class DetailPage implements OnInit {
   constructor(public navCtrl: NavController, public navParams: NavParams, public diagnosticService: DiagnosticService) {}
 
   ngOnInit() {
-    this.diagnostic = this.diagnosticService.getDiagnostic(this.navParams.get('id'));
+    this.diagnostic = this.navParams.get('diagnostic') ? this.navParams.get('diagnostic') : this.diagnosticService.getDiagnostic(this.navParams.get('id'));
+    if (this.diagnostic && !this.diagnostic.cows.length) this.diagnosticService.generateCows(this.diagnostic);
   }
 
   saveDiagnostic () {

@@ -1,21 +1,28 @@
 {
   "BACK_BUTTON_TEXT": "Back",
 
-  "NAME": "Name",
-  "EMAIL": "Email",
-  "USERNAME": "Username",
-  "PASSWORD": "Password",
-  "LOGIN": "Sign in",
-  "SIGNUP": "Sign up",
+  "LIST_MASTER_TITLE": "Choose a diagnosis",
+  "LIST_MASTER_BUTTON": "New test",
+  "LIST_MASTER_DIAGNOSTIC_FROM": "diagnosis from ",
+  "LIST_MASTER_CHEPTEL_OF": "On a flock of",
+  "LIST_MASTER_COWS": "cows",
+  "LIST_MASTER_DIAGNOSTIC_GO_TO_DETAIL": "See the detail",
 
-  "MAP_TITLE": "Map",
+  "FORM_DIAGNOSTIC_TITLE": "Make un diagnosis",
+  "FORM_DIAGNOSTIC_COW_NUMBER": "Number of cows in the herd",
+  "FORM_DIAGNOSTIC_REFERENCE": "Reference weight",
+  "FORM_DIAGNOSTIC_MAX": "Maximum weight",
+  "FORM_DIAGNOSTIC_MIN": "Minimimum weight",
+  "FORM_DIAGNOSTIC_IDEAL": "Ideal weight",
+  "FORM_DIAGNOSTIC_BUTTON": "Send",
+  "FORM_DIAGNOSTIC_WARNING_TITLE": "Warning",
+  "FORM_DIAGNOSTIC_WARNING_SUBTITLE": "Make sure you have completed all fields before sending your diagnosis",
 
-  "LIST_MASTER_TITLE": "Diagnostic",
+  "ITEM_DETAIL_TITLE": "Your diagnosis",
+  "ITEM_DETAIL_BUTTON": "Save",
 
-  "ITEM_NAME_PLACEHOLDER": "Name",
-  "ITEM_ABOUT_PLACEHOLDER": "About",
+  "DIAGNOSTIC_SERVICE_LABEL_OVER": "Over ",
+  "DIAGNOSTIC_SERVICE_LABEL_UNDER": "Under ",
 
-  "DONE_BUTTON": "Done",
-  "CANCEL_BUTTON": "Cancel",
   "DELETE_BUTTON": "Delete"
 }

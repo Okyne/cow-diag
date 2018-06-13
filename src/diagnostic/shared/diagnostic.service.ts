@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import * as _ from 'underscore';
 
 import { Diagnostic } from '../shared/diagnostic.model';
@@ -7,7 +8,7 @@ import { Diagnostic } from '../shared/diagnostic.model';
 export class DiagnosticService {
   diagnostics: Diagnostic[] = [];
 
-  constructor() {
+  constructor(public translateService: TranslateService) {
     let diagnostics = [
       {
         id: 1,
@@ -39,7 +40,7 @@ export class DiagnosticService {
     ];
 
     for (let diagnostic of diagnostics) {
-      this.diagnostics.push(new Diagnostic(diagnostic.id, diagnostic.count, diagnostic.min, diagnostic.max, diagnostic.ideal, diagnostic.date, diagnostic.cows));
+      this.diagnostics.push(new Diagnostic(diagnostic.id, diagnostic.count, diagnostic.min, diagnostic.max, diagnostic.ideal));
     }
   }
 
@@ -59,17 +60,28 @@ export class DiagnosticService {
 
   getChartData(chartData) {
     chartData = chartData || [];
+    let labelOver, labelUnder;
+    this.translateService.get('DIAGNOSTIC_SERVICE_LABEL_OVER').subscribe(
+      label => {
+        labelOver = label;
+      }
+    )
+    this.translateService.get('DIAGNOSTIC_SERVICE_LABEL_UNDER').subscribe(
+      label => {
+        labelUnder = label;
+      }
+    )
     return function (diagnostic) {
       let overweighted = _.filter(diagnostic.cows, function(weight) {
           if (weight > diagnostic.ideal) return weight;
         }).length;
       chartData.push({
-        label: 'Over ' + diagnostic.ideal,
+        label: labelOver + diagnostic.ideal,
         value: overweighted,
         color: '#c30436'
       })
       chartData.push({
-        label: 'Under ' + diagnostic.ideal,
+        label: labelUnder + diagnostic.ideal,
         value: diagnostic.cows.length - overweighted,
         color: '#576065'
       })
@@ -107,16 +119,10 @@ export class DiagnosticService {
   }
 
   initializeDiagnostic() {
-    return new Diagnostic(this.getNextId(), null, null, null, null, new Date(), null);
+    return new Diagnostic(this.getNextId(), null, null, null, null);
   }
 
   save(diagnostic: Diagnostic) {
-    let currentDiagnostic = _.findWhere(this.diagnostics, {id: diagnostic.id});
-    diagnostic = this.generateCows(diagnostic);
-    if (currentDiagnostic) {
-      this.diagnostics.push(diagnostic);
-    } else {
-      this.diagnostics.push(diagnostic);
-    }
+    this.diagnostics.push(diagnostic);
   }
 }

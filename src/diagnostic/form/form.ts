@@ -40,9 +40,9 @@ export class FormPage {
       }).present();
       return false
     }
-    this.diagnosticService.save(this.newDiagnostic)
     this.navCtrl.push('DetailPage', {
-      id: this.newDiagnostic.id
+      id: this.newDiagnostic.id,
+      diagnostic: this.newDiagnostic
     });
   }
 

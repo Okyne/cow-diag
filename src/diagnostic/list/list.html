@@ -9,9 +9,9 @@
     <ion-item-sliding #item *ngFor="let diagnostic of currentDiagnostics">
       <ion-item>
         <ion-thumbnail item-start>
-          <neo-chart [diagnostic]="diagnostic"></neo-chart>
+          <neo-chart [diagnostic]="diagnostic" style="display: block"></neo-chart>
         </ion-thumbnail>
-        <h2>{{ 'LIST_MASTER_DIAGNOSTIC_FROM' | translate }} {{ diagnostic.date | date }}</h2>
+        <h2>{{ 'LIST_MASTER_DIAGNOSTIC_FROM' | translate }} {{ diagnostic.date | date: 'dd/MM/yy' }}</h2>
         <p>{{'LIST_MASTER_CHEPTEL_OF' | translate }} <strong>{{ diagnostic.count }}</strong> {{'LIST_MASTER_COWS' | translate }}</p>
         <button ion-button clear item-end
                 [navPush]="'DetailPage'" [navParams]="{id: diagnostic.id}"

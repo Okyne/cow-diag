@@ -1,14 +1,6 @@
 {
   "BACK_BUTTON_TEXT": "Retour",
 
-  "NAME": "Nom",
-  "PASSWORD": "Mot de passe",
-  "EMAIL": "E-mail",
-
-  "TAB1_TITLE": "Items",
-  "TAB2_TITLE": "Recherche",
-  "TAB3_TITLE": "Paramètres",
-
   "LIST_MASTER_TITLE": "Choisissez un diagnostic",
   "LIST_MASTER_BUTTON": "Nouveau test",
   "LIST_MASTER_DIAGNOSTIC_FROM": "Diagnostic du",
@@ -29,7 +21,8 @@
   "ITEM_DETAIL_TITLE": "Votre diagnostic",
   "ITEM_DETAIL_BUTTON": "Enregistrer",
 
-  "DONE_BUTTON": "Valider",
-  "CANCEL_BUTTON": "Annuler",
+  "DIAGNOSTIC_SERVICE_LABEL_OVER": "Au dessus de ",
+  "DIAGNOSTIC_SERVICE_LABEL_UNDER": "Sous ",
+
   "DELETE_BUTTON": "Supprimer"
 }

@@ -1,28 +1,34 @@
 import { Component, Input, OnInit } from '@angular/core';
+import * as _ from 'underscore';
 
 import { Diagnostic } from '../../shared/diagnostic.model';
 import { DiagnosticService } from '../../shared/diagnostic.service';
 
 @Component({
   selector: 'neo-chart',
-  template: `<angular-d3-donut [id]="donutChartId" [data]="donutChartData" [width]="svgWidth" [height]="svgHeight"
-            outerRadius="25" innerRadius="10"></angular-d3-donut>`
+  template: `<div [class]="(format ? 'large' : '') + 'neo-chart-container'">
+    <canvas baseChart
+            [data]="donutChartData"
+            [labels]="donutChartLabels"
+            [chartType]="donutChartType"></canvas>
+  </div>`
 })
 export class NeoChartComponent implements OnInit {
   @Input() diagnostic: Diagnostic;
   @Input() format: any;
-  @Input() hasLabel: boolean;
 
   svgWidth: number;
   svgHeight: number;
-  donutChartId: any;
   donutChartData: any[];
+  donutChartLabels: any[];
+  donutChartType: string;
 
   constructor(public diagnosticService: DiagnosticService) {}
 
   ngOnInit(): void {
     this.svgWidth = this.svgHeight = this.format == 'large' ? 250 : 50;
-    this.donutChartId = 'chart_' + this.diagnostic.id
-    this.donutChartData = this.diagnosticService.getChartData([])(this.diagnostic);
+    this.donutChartData = _.map(this.diagnosticService.getChartData([])(this.diagnostic), 'value');
+    this.donutChartLabels = _.map(this.diagnosticService.getChartData([])(this.diagnostic), 'label');
+    this.donutChartType = 'doughnut';
   }
 }

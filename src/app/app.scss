@@ -16,6 +16,9 @@
 // automatically applied to the <body> element in the app.
 
 ion-content {
+  background: url(../assets/img/bg.jpg) center center no-repeat;
+  background-size: cover;
+
   &:before {
     content: '';
     position: absolute;
@@ -42,47 +45,10 @@ ion-content {
   }
 }
 .scroll-content {
-  background: url(../assets/img/bg.jpg)center center no-repeat;
-  background-size: cover;
-  padding-top: 80px;
-  padding-bottom: 75px;
-
-  &:before {
-    width: 100% !important;
-    height: 100% !important;
-    background: rgba(255,255,255,0.6);
-    bottom: 0 !important;
-  }
+  margin-top: 120px !important;
+  margin-bottom: 120px !important;
 }
 
 .button {
   box-shadow: none;
-}
-
-.tick text {
-  font-size: 12px;
-}
-
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #4C5554;
-  stroke-width: 1;
-}
-
-.x.axis .tick line {
-  display: none
-}
-
-.domain {
-  display: block !important;
-  stroke: #4C5554 !important;
-  stroke-width: 2 !important;
-}
-.legend {
-  font-size: 12px;
-  font-family: sans-serif;
-  rect {
-    stroke-width: 2;
-  }
 }
