@@ -1,18 +1,17 @@
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>{{ item.name }}</ion-title>
+  <ion-navbar color="secondary">
+    <ion-title>{{ 'ITEM_DETAIL_TITLE' | translate }}</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content>
-  <div class="item-profile" text-center #profilePic [style.background-image]="'url(' + item.profilePic + ')'">
-  </div>
-
-  <div class="item-detail" padding>
-    <h2>{{item.name}}</h2>
-    <p>{{item.about}}</p>
-  </div>
+  <neo-chart *ngIf="diagnostic" [diagnostic]="diagnostic" format="large" hasLabel="true"></neo-chart>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary">
+    <button title="{{ 'ITEM_DETAIL_BUTTON' | translate }}"
+       (click)="saveDiagnostic()"
+       class="button button-md button-default button-default-md button-full button-full-md">{{ 'ITEM_DETAIL_BUTTON' | translate }}</button>
+  </ion-toolbar>
+</ion-footer>

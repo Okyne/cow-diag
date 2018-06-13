@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 
-import { Item } from '../../models/item';
+import { Diagnostic } from '../../models/diagnostic';
 
 @Injectable()
-export class Items {
-  items: Item[] = [];
+export class Diagnostics {
+  diagnostics: Diagnostic[] = [];
 
-  defaultItem: any = {
+  defaultDiagnostic: any = {
     "name": "Burt Bear",
     "profilePic": "assets/img/speakers/bear.jpg",
     "about": "Burt is a Bear.",
@@ -14,7 +14,7 @@ export class Items {
 
 
   constructor() {
-    let items = [
+    let diagnostics = [
       {
         "name": "Burt Bear",
         "profilePic": "assets/img/speakers/bear.jpg",
@@ -52,17 +52,17 @@ export class Items {
       }
     ];
 
-    for (let item of items) {
-      this.items.push(new Item(item));
+    for (let diagnostic of diagnostics) {
+      this.diagnostics.push(new Diagnostic(diagnostic));
     }
   }
 
   query(params?: any) {
     if (!params) {
-      return this.items;
+      return this.diagnostics;
     }
 
-    return this.items.filter((item) => {
+    return this.diagnostics.filter((item) => {
       for (let key in params) {
         let field = item[key];
         if (typeof field == 'string' && field.toLowerCase().indexOf(params[key].toLowerCase()) >= 0) {
@@ -75,11 +75,11 @@ export class Items {
     });
   }
 
-  add(item: Item) {
-    this.items.push(item);
+  add(item: Diagnostic) {
+    this.diagnostics.push(item);
   }
 
-  delete(item: Item) {
-    this.items.splice(this.items.indexOf(item), 1);
+  delete(item: Diagnostic) {
+    this.diagnostics.splice(this.diagnostics.indexOf(item), 1);
   }
 }

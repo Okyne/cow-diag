@@ -3,14 +3,16 @@ import { TranslateModule } from '@ngx-translate/core';
 import { IonicPageModule } from 'ionic-angular';
 
 import { ItemDetailPage } from './item-detail';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
-    ItemDetailPage,
+    ItemDetailPage
   ],
   imports: [
     IonicPageModule.forChild(ItemDetailPage),
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
+    SharedModule
   ],
   exports: [
     ItemDetailPage

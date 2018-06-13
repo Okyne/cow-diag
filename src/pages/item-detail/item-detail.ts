@@ -1,18 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { Items } from '../../providers';
+import { Diagnostic } from '../../models/diagnostic';
+import { Diagnostics } from '../../providers';
 
-@IonicPage()
+@IonicPage({
+  segment: 'diagnostic/:id'
+})
 @Component({
   selector: 'page-item-detail',
-  templateUrl: 'item-detail.html'
+  templateUrl: 'item-detail.html',
 })
-export class ItemDetailPage {
-  item: any;
+export class ItemDetailPage implements OnInit {
+  diagnostic: Diagnostic;
 
-  constructor(public navCtrl: NavController, navParams: NavParams, items: Items) {
-    this.item = navParams.get('item') || items.defaultItem;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public diagnostics: Diagnostics) {}
+
+  ngOnInit() {
+    this.diagnostic = this.diagnostics.getDiagnostic(this.navParams.get('id'));
+  }
+
+  saveDiagnostic () {
+    this.diagnostics.save(this.diagnostic)
+    this.navCtrl.push('ListMasterPage')
   }
 
 }
