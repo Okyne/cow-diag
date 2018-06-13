@@ -1,35 +1,38 @@
 <ion-header>
-
-  <ion-navbar>
+  <ion-navbar color="secondary">
     <ion-title>{{ 'LIST_MASTER_TITLE' | translate }}</ion-title>
-
-    <ion-buttons end>
-      <button ion-button icon-only (click)="addItem()">
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
 <ion-content>
-
   <ion-list>
-    <ion-item-sliding *ngFor="let item of currentItems">
-      <button ion-item (click)="openItem(item)">
-        <ion-avatar item-start>
-          <img [src]="item.profilePic" />
-        </ion-avatar>
-        <h2>{{item.name}}</h2>
-        <p>{{item.about}}</p>
-        <ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>
-      </button>
+    <ion-item-sliding #item *ngFor="let diagnostic of currentDiagnostics">
+      <ion-item>
+        <ion-thumbnail item-start>
+          <neo-chart [diagnostic]="diagnostic"></neo-chart>
+        </ion-thumbnail>
+        <h2>{{ 'LIST_MASTER_DIAGNOSTIC_FROM' | translate }} {{ diagnostic.date | date }}</h2>
+        <p>{{'LIST_MASTER_CHEPTEL_OF' | translate }} <strong>{{ diagnostic.count }}</strong> {{'LIST_MASTER_COWS' | translate }}</p>
+        <button ion-button clear item-end
+                [navPush]="'ItemDetailPage'" [navParams]="{id: diagnostic.id}"
+                [title]="'LIST_MASTER_DIAGNOSTIC_GO_TO_DETAIL' | translate">
+          <ion-icon name="arrow-forward"></ion-icon>
+        </button>
+      </ion-item>
 
-      <ion-item-options>
-        <button ion-button color="danger" (click)="deleteItem(item)">
+      <ion-item-options side="left">
+        <button ion-button color="danger" (click)="deleteDiagnostic(diagnostic)">
           {{ 'DELETE_BUTTON' | translate }}
         </button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary">
+    <button title="{{ 'LIST_MASTER_BUTTON' | translate }}"
+       [navPush]="newDiagnostic"
+       class="button button-md button-default button-default-md button-full button-full-md">{{ 'LIST_MASTER_BUTTON' | translate }}</button>
+  </ion-toolbar>
+</ion-footer>
