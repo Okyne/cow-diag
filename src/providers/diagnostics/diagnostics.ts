@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Diagnostic } from '../../models/diagnostic';
+//import Mocks from '../../mocks/providers/diagnostics';
 
 @Injectable()
 export class Diagnostics {
@@ -8,16 +9,15 @@ export class Diagnostics {
   constructor() { }
 
   add(diagnostic: Diagnostic) {
+
   }
 
   delete(diagnostic: Diagnostic) {
+
   }
 
-  initialize(diagnostic: Diagnostic) {
-    return diagnostic
-  }
   query(params?: any) {
-    //return this.api.get('/items', params);
+    //return this.diagnostics.query();
   }
 
 }
