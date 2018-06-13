@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'underscore';
 
-import { Diagnostic } from '../../models/diagnostic';
+import { Diagnostic } from '../shared/diagnostic.model';
 
 @Injectable()
-export class Diagnostics {
+export class DiagnosticService {
   diagnostics: Diagnostic[] = [];
 
   constructor() {
@@ -45,9 +45,9 @@ export class Diagnostics {
 
   delete(diagnostic: Diagnostic) {
     this.diagnostics = _.reject(this.diagnostics, function(d) {
-      if (d.id == diagnostic.id) return d
+      if (d.id == diagnostic.id) return d;
     });
-    return this.diagnostics
+    return this.diagnostics;
   }
 
   generateCows(diagnostic) {
@@ -78,21 +78,11 @@ export class Diagnostics {
   }
 
   getDiagnostic(diagnostic) {
-    let id = diagnostic && diagnostic.id || diagnostic
-    return _.findWhere(this.diagnostics, {id: id})
+    let id = diagnostic && diagnostic.id || diagnostic;
+    return _.findWhere(this.diagnostics, {id: id});
   }
 
-  getNextId() {
-    return _.max(this.diagnostics, function(diagnostic) {
-      return diagnostic.id
-    }).id ++
-  }
-
-  initialize() {
-    return new Diagnostic(this.getNextId(), null, null, null, null, new Date(), null)
-  }
-
-  query(params?: any) {
+  getDiagnostics(params?: any) {
     if (!params) {
       return this.diagnostics;
     }
@@ -110,13 +100,23 @@ export class Diagnostics {
     });
   }
 
+  getNextId() {
+    return _.max(this.diagnostics, function(diagnostic) {
+      return diagnostic.id;
+    }).id ++;
+  }
+
+  initializeDiagnostic() {
+    return new Diagnostic(this.getNextId(), null, null, null, null, new Date(), null);
+  }
+
   save(diagnostic: Diagnostic) {
-    let currentDiagnostic = _.findWhere(this.diagnostics, {id: diagnostic.id})
-    diagnostic = this.generateCows(diagnostic)
+    let currentDiagnostic = _.findWhere(this.diagnostics, {id: diagnostic.id});
+    diagnostic = this.generateCows(diagnostic);
     if (currentDiagnostic) {
-      this.diagnostics.push(diagnostic)
+      this.diagnostics.push(diagnostic);
     } else {
-      this.diagnostics.push(diagnostic)
+      this.diagnostics.push(diagnostic);
     }
   }
 }

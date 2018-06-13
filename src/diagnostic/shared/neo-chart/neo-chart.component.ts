@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Diagnostic } from '../../../models/diagnostic';
-import { Diagnostics } from '../../../mocks/providers/diagnostics';
+import { Diagnostic } from '../../shared/diagnostic.model';
+import { DiagnosticService } from '../../shared/diagnostic.service';
 
 @Component({
   selector: 'neo-chart',
@@ -18,11 +18,11 @@ export class NeoChartComponent implements OnInit {
   donutChartId: any;
   donutChartData: any[];
 
-  constructor(public diagnostics: Diagnostics) {}
+  constructor(public diagnosticService: DiagnosticService) {}
 
   ngOnInit(): void {
     this.svgWidth = this.svgHeight = this.format == 'large' ? 250 : 50;
     this.donutChartId = 'chart_' + this.diagnostic.id
-    this.donutChartData = this.diagnostics.getChartData([])(this.diagnostic);
+    this.donutChartData = this.diagnosticService.getChartData([])(this.diagnostic);
   }
 }

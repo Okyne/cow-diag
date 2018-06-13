@@ -3,21 +3,21 @@ import { IonicPage, AlertController, NavController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import * as _ from 'underscore';
 
-import { Diagnostics } from '../../mocks/providers/diagnostics';
+import { DiagnosticService } from '../shared/diagnostic.service';
 
 @IonicPage({
   segment: 'form'
 })
 @Component({
-  selector: 'form-diagnostic',
-  templateUrl: 'form-diagnostic.html'
+  selector: 'page-form',
+  templateUrl: 'form.html'
 })
-export class FormDiagnosticPage {
+export class FormPage {
 
   newDiagnostic: any
 
-  constructor(private diagnostics: Diagnostics, public alertCtrl: AlertController, public navCtrl: NavController, public translateService: TranslateService) {
-    this.newDiagnostic = this.diagnostics.initialize()
+  constructor(private diagnosticService: DiagnosticService, public alertCtrl: AlertController, public navCtrl: NavController, public translateService: TranslateService) {
+    this.newDiagnostic = this.diagnosticService.initializeDiagnostic()
   }
 
   createDiagnostic () {
@@ -40,8 +40,8 @@ export class FormDiagnosticPage {
       }).present();
       return false
     }
-    this.diagnostics.save(this.newDiagnostic)
-    this.navCtrl.push('ItemDetailPage', {
+    this.diagnosticService.save(this.newDiagnostic)
+    this.navCtrl.push('DetailPage', {
       id: this.newDiagnostic.id
     });
   }

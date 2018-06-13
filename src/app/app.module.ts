@@ -4,37 +4,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Camera } from '@ionic-native/camera';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { IonicStorageModule, Storage } from '@ionic/storage';
+import { IonicStorageModule } from '@ionic/storage';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
-import { Diagnostics } from '../mocks/providers/diagnostics';
-import { Settings } from '../providers';
+import { DiagnosticService } from '../diagnostic/shared/diagnostic.service';
 import { MyApp } from './app.component';
-import { FormDiagnosticPageModule } from '../pages/form-diagnostic/form-diagnostic.module';
-import { ItemDetailPageModule } from '../pages/item-detail/item-detail.module';
-import { SharedModule } from '../pages/shared/shared.module';
+import { FormPageModule } from '../diagnostic/form/form.module';
+import { DetailPageModule } from '../diagnostic/detail/detail.module';
+import { SharedModule } from '../diagnostic/shared/shared.module';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
-
-export function provideSettings(storage: Storage) {
-  /**
-   * The Settings provider takes a set of default settings for your app.
-   *
-   * You can add new settings options at any time. Once the settings are saved,
-   * these values will not overwrite the saved values (this can be done manually if desired).
-   */
-  return new Settings(storage, {
-    option1: true,
-    option2: 'Ionitron J. Framework',
-    option3: '3',
-    option4: 'Hello'
-  });
 }
 
 @NgModule({
@@ -53,8 +37,8 @@ export function provideSettings(storage: Storage) {
     }),
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    FormDiagnosticPageModule,
-    ItemDetailPageModule,
+    FormPageModule,
+    DetailPageModule,
     SharedModule
   ],
   bootstrap: [IonicApp],
@@ -62,11 +46,10 @@ export function provideSettings(storage: Storage) {
     MyApp
   ],
   providers: [
-    Diagnostics,
+    DiagnosticService,
     Camera,
     SplashScreen,
     StatusBar,
-    { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     // Keep this to enable Ionic's runtime error handling during development
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]

@@ -14,7 +14,7 @@
         <h2>{{ 'LIST_MASTER_DIAGNOSTIC_FROM' | translate }} {{ diagnostic.date | date }}</h2>
         <p>{{'LIST_MASTER_CHEPTEL_OF' | translate }} <strong>{{ diagnostic.count }}</strong> {{'LIST_MASTER_COWS' | translate }}</p>
         <button ion-button clear item-end
-                [navPush]="'ItemDetailPage'" [navParams]="{id: diagnostic.id}"
+                [navPush]="'DetailPage'" [navParams]="{id: diagnostic.id}"
                 [title]="'LIST_MASTER_DIAGNOSTIC_GO_TO_DETAIL' | translate">
           <ion-icon name="arrow-forward"></ion-icon>
         </button>
