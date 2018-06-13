@@ -14,3 +14,75 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+ion-content {
+  &:before {
+    content: '';
+    position: absolute;
+    top: 45px;
+    left: 10px;
+    width: 250px;
+    height: 75px;
+    background: url(../assets/img/logo-small.png) top left no-repeat;
+    z-index: 10;
+    background-size: cover;
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    top: initial !important;
+    bottom: 46px;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background: url(../assets/img/footer-img.png)center center repeat-x;
+    background-size: contain;
+    width: 100% !important;
+    height: 71px !important;
+  }
+}
+.scroll-content {
+  background: url(../assets/img/bg.jpg)center center no-repeat;
+  background-size: cover;
+  padding-top: 80px;
+  padding-bottom: 75px;
+
+  &:before {
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(255,255,255,0.6);
+    bottom: 0 !important;
+  }
+}
+
+.button {
+  box-shadow: none;
+}
+
+.tick text {
+  font-size: 12px;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #4C5554;
+  stroke-width: 1;
+}
+
+.x.axis .tick line {
+  display: none
+}
+
+.domain {
+  display: block !important;
+  stroke: #4C5554 !important;
+  stroke-width: 2 !important;
+}
+.legend {
+  font-size: 12px;
+  font-family: sans-serif;
+  rect {
+    stroke-width: 2;
+  }
+}

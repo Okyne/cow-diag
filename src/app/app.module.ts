@@ -9,9 +9,12 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
-import { Items } from '../mocks/providers/items';
-import { Settings, User, Api } from '../providers';
+import { Diagnostics } from '../mocks/providers/diagnostics';
+import { Settings } from '../providers';
 import { MyApp } from './app.component';
+import { FormDiagnosticPageModule } from '../pages/form-diagnostic/form-diagnostic.module';
+import { ItemDetailPageModule } from '../pages/item-detail/item-detail.module';
+import { SharedModule } from '../pages/shared/shared.module';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
@@ -49,16 +52,17 @@ export function provideSettings(storage: Storage) {
       }
     }),
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    FormDiagnosticPageModule,
+    ItemDetailPageModule,
+    SharedModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp
   ],
   providers: [
-    Api,
-    Items,
-    User,
+    Diagnostics,
     Camera,
     SplashScreen,
     StatusBar,

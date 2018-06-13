@@ -1,24 +1,25 @@
-/**
- * A generic model that our Master-Detail pages list, create, and delete.
- *
- * Change "Item" to the noun your app will use. For example, a "Contact," or a
- * "Customer," or a "Animal," or something like that.
- *
- * The Items service manages creating instances of Item, so go ahead and rename
- * that something that fits your app as well.
- */
-export class Item {
+export class Diagnostic {
 
-  constructor(fields: any) {
-    // Quick and dirty extend/assign fields to this model
-    for (const f in fields) {
-      // @ts-ignore
-      this[f] = fields[f];
-    }
+  id: number
+  count: number
+  cows: any[]
+  date: any
+  ideal: number
+  min: number
+  max: number
+
+  constructor(id, count, min, max, ideal, date, cows) {
+    this.date = date
+    this.count = count
+    this.cows = cows || []
+    this.id = id
+    this.ideal = ideal
+    this.min = min
+    this.max = max
   }
 
 }
 
-export interface Item {
+export interface Diagnostic {
   [prop: string]: any;
 }

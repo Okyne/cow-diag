@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import * as _ from 'underscore';
 
 import { Diagnostic } from '../../models/diagnostic';
 
@@ -6,55 +7,89 @@ import { Diagnostic } from '../../models/diagnostic';
 export class Diagnostics {
   diagnostics: Diagnostic[] = [];
 
-  defaultDiagnostic: any = {
-    "name": "Burt Bear",
-    "profilePic": "assets/img/speakers/bear.jpg",
-    "about": "Burt is a Bear.",
-  };
-
-
   constructor() {
     let diagnostics = [
       {
-        "name": "Burt Bear",
-        "profilePic": "assets/img/speakers/bear.jpg",
-        "about": "Burt is a Bear."
+        id: 1,
+        count: 50,
+        cows: [260, 209, 326, 128, 213, 285, 376, 222, 249, 329, 311, 127, 239, 343, 203, 228, 239, 318, 148, 186, 122, 297, 186, 192, 235, 329, 253, 207, 223, 336, 179, 287, 358, 312, 248, 150, 342, 142, 294, 289, 160, 257, 347, 346, 259, 379, 287, 350, 378, 262],
+        date: '2018/06/01',
+        ideal: 320,
+        max: 380,
+        min: 120,
       },
       {
-        "name": "Charlie Cheetah",
-        "profilePic": "assets/img/speakers/cheetah.jpg",
-        "about": "Charlie is a Cheetah."
+        id: 2,
+        count: 75,
+        cows: [221, 312, 254, 270, 101, 351, 283, 293, 148, 306, 54, 109, 328, 79, 96, 223, 280, 377, 196, 234, 86, 52, 124, 225, 337, 185, 291, 192, 212, 119, 224, 217, 354, 240, 102, 353, 332, 216, 260, 105, 293, 211, 358, 143, 363, 340, 51, 223, 358, 153, 238, 253, 180, 116, 340, 363, 126, 109, 210, 136, 133, 169, 201, 386, 223, 124, 307, 283, 76, 55, 386, 355, 252, 248, 324],
+        date: '2018/06/08',
+        ideal: 215,
+        max: 389,
+        min: 50,
       },
       {
-        "name": "Donald Duck",
-        "profilePic": "assets/img/speakers/duck.jpg",
-        "about": "Donald is a Duck."
-      },
-      {
-        "name": "Eva Eagle",
-        "profilePic": "assets/img/speakers/eagle.jpg",
-        "about": "Eva is an Eagle."
-      },
-      {
-        "name": "Ellie Elephant",
-        "profilePic": "assets/img/speakers/elephant.jpg",
-        "about": "Ellie is an Elephant."
-      },
-      {
-        "name": "Molly Mouse",
-        "profilePic": "assets/img/speakers/mouse.jpg",
-        "about": "Molly is a Mouse."
-      },
-      {
-        "name": "Paul Puppy",
-        "profilePic": "assets/img/speakers/puppy.jpg",
-        "about": "Paul is a Puppy."
+        id: 3,
+        count: 99,
+        cows: [219, 238, 152, 195, 224, 450, 255, 104, 283, 293, 317, 134, 74, 334, 381, 207, 111, 407, 99, 258, 208, 258, 481, 74, 175, 240, 171, 373, 488, 91, 404, 187, 373, 437, 225, 457, 141, 465, 446, 343, 210, 284, 57, 105, 492, 295, 227, 440, 178, 482, 327, 331, 140, 170, 352, 271, 173, 420, 381, 121, 485, 174, 129, 212, 182, 300, 350, 110, 66, 326, 375, 377, 428, 232, 205, 52, 316, 448, 218, 328, 100, 298, 136, 442, 270, 451, 368, 457, 288, 100, 489, 319, 150, 219, 456, 412, 446, 442, 146],
+        date: '2018/06/12',
+        ideal: 245,
+        max: 500,
+        min: 50,
       }
     ];
 
     for (let diagnostic of diagnostics) {
-      this.diagnostics.push(new Diagnostic(diagnostic));
+      this.diagnostics.push(new Diagnostic(diagnostic.id, diagnostic.count, diagnostic.min, diagnostic.max, diagnostic.ideal, diagnostic.date, diagnostic.cows));
     }
+  }
+
+  delete(diagnostic: Diagnostic) {
+    this.diagnostics = _.reject(this.diagnostics, function(d) {
+      if (d.id == diagnostic.id) return d
+    });
+    return this.diagnostics
+  }
+
+  generateCows(diagnostic) {
+    for (let i = 0; i < diagnostic.count; i++) {
+      diagnostic.cows.push(Math.floor(Math.random()*(diagnostic.max - diagnostic.min + 1) + diagnostic.min));
+    }
+    return diagnostic;
+  }
+
+  getChartData(chartData) {
+    chartData = chartData || [];
+    return function (diagnostic) {
+      let overweighted = _.filter(diagnostic.cows, function(weight) {
+          if (weight > diagnostic.ideal) return weight;
+        }).length;
+      chartData.push({
+        label: 'Over ' + diagnostic.ideal,
+        value: overweighted,
+        color: '#c30436'
+      })
+      chartData.push({
+        label: 'Under ' + diagnostic.ideal,
+        value: diagnostic.cows.length - overweighted,
+        color: '#576065'
+      })
+      return chartData;
+    }
+  }
+
+  getDiagnostic(diagnostic) {
+    let id = diagnostic && diagnostic.id || diagnostic
+    return _.findWhere(this.diagnostics, {id: id})
+  }
+
+  getNextId() {
+    return _.max(this.diagnostics, function(diagnostic) {
+      return diagnostic.id
+    }).id ++
+  }
+
+  initialize() {
+    return new Diagnostic(this.getNextId(), null, null, null, null, new Date(), null)
   }
 
   query(params?: any) {
@@ -62,24 +97,26 @@ export class Diagnostics {
       return this.diagnostics;
     }
 
-    return this.diagnostics.filter((item) => {
+    return this.diagnostics.filter((diagnostic) => {
       for (let key in params) {
-        let field = item[key];
+        let field = diagnostic[key];
         if (typeof field == 'string' && field.toLowerCase().indexOf(params[key].toLowerCase()) >= 0) {
-          return item;
+          return diagnostic;
         } else if (field == params[key]) {
-          return item;
+          return diagnostic;
         }
       }
       return null;
     });
   }
 
-  add(item: Diagnostic) {
-    this.diagnostics.push(item);
-  }
-
-  delete(item: Diagnostic) {
-    this.diagnostics.splice(this.diagnostics.indexOf(item), 1);
+  save(diagnostic: Diagnostic) {
+    let currentDiagnostic = _.findWhere(this.diagnostics, {id: diagnostic.id})
+    diagnostic = this.generateCows(diagnostic)
+    if (currentDiagnostic) {
+      this.diagnostics.push(diagnostic)
+    } else {
+      this.diagnostics.push(diagnostic)
+    }
   }
 }
