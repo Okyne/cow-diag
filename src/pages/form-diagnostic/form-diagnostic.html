@@ -1,19 +1,54 @@
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>{{ 'ITEM_DETAIL_TITLE' | translate }}</ion-title>
+  <ion-navbar color="secondary">
+    <ion-title>{{ 'FORM_DIAGNOSTIC_TITLE' | translate }}</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content>
-  <neo-chart diagnostic="diagnostic"></neo-chart>
+  <form>
+    <ion-list>
+      <ion-list-header>
+        <ion-label>{{ 'FORM_DIAGNOSTIC_COW_NUMBER' | translate }}</ion-label>
+        <ion-badge item-end color="primary">{{ newDiagnostic.count }}</ion-badge>
+      </ion-list-header>
+      <ion-item>
+        <ion-range min="10" max="300" pin="true" snaps="true" [(ngModel)]="newDiagnostic.count" color="primary"
+                   name="count">
+          <ion-label range-left>10</ion-label>
+          <ion-label range-right>300</ion-label>
+        </ion-range>
+      </ion-item>
+
+      <ion-list-header>
+        <ion-label>{{ 'FORM_DIAGNOSTIC_REFERENCE' | translate }}</ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-input type="number" [(ngModel)]="newDiagnostic.min" name="min" placeholder="{{ 'FORM_DIAGNOSTIC_MIN' | translate }}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="number" [(ngModel)]="newDiagnostic.max" name="max" placeholder="{{ 'FORM_DIAGNOSTIC_MAX' | translate }}"></ion-input>
+      </ion-item>
+
+      <ion-list-header>
+        <ion-label>{{ 'FORM_DIAGNOSTIC_IDEAL' | translate }}</ion-label>
+        <ion-badge item-end color="primary">{{ newDiagnostic.ideal }}</ion-badge>
+      </ion-list-header>
+      <ion-item>
+        <ion-range pin="true" snaps="true" [(ngModel)]="newDiagnostic.ideal" color="primary"
+                   [min]="newDiagnostic.min" [max]="newDiagnostic.max" name="ideal">
+          <ion-label range-left>{{ newDiagnostic.min }}</ion-label>
+          <ion-label range-right>{{ newDiagnostic.max }}</ion-label>
+        </ion-range>
+      </ion-item>
+    </ion-list>
+  </form>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar color="primary">
-    <a title="{{ 'ITEM_DETAIL_BUTTON' | translate }}"
-       class="button button-md button-default button-default-md button-full button-full-md">{{ 'ITEM_DETAIL_BUTTON' | translate }}</a>
+    <button title="{{ 'FORM_DIAGNOSTIC_BUTTON' | translate }}"
+       (click)="createDiagnostic()"
+       class="button button-md button-default button-default-md button-full button-full-md">{{ 'FORM_DIAGNOSTIC_BUTTON' | translate }}</button>
   </ion-toolbar>
 </ion-footer>
