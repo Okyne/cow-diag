@@ -1,48 +1,35 @@
 {
+  "BACK_BUTTON_TEXT": "Retour",
+
   "NAME": "Nom",
   "PASSWORD": "Mot de passe",
   "EMAIL": "E-mail",
-  "LOGIN": "Connexion",
-  "SIGNUP": "Inscription",
 
   "TAB1_TITLE": "Items",
   "TAB2_TITLE": "Recherche",
   "TAB3_TITLE": "Paramètres",
 
-  "MAP_TITLE": "Carte",
+  "LIST_MASTER_TITLE": "Choisissez un diagnostic",
+  "LIST_MASTER_BUTTON": "Nouveau test",
+  "LIST_MASTER_DIAGNOSTIC_FROM": "Diagnostic du",
+  "LIST_MASTER_CHEPTEL_OF": "Sur un cheptel de",
+  "LIST_MASTER_COWS": "vaches",
+  "LIST_MASTER_DIAGNOSTIC_GO_TO_DETAIL": "Voir le detail",
 
-  "TUTORIAL_SLIDE1_TITLE": "Bienvenue dans le kit de démarrage Ionic Super Starter",
-  "TUTORIAL_SLIDE1_DESCRIPTION": "<b>Ionic Super Starter</b> est un kit complet pour démarrer sur Ionic. Il repose sur les meilleures pratiques et implémente de nombreux types de pages.",
+  "FORM_DIAGNOSTIC_TITLE": "Établissez un diagnostic",
+  "FORM_DIAGNOSTIC_COW_NUMBER": "Nombre de vaches dans le cheptel",
+  "FORM_DIAGNOSTIC_REFERENCE": "Poids de référence",
+  "FORM_DIAGNOSTIC_MAX": "Poids maximum",
+  "FORM_DIAGNOSTIC_MIN": "Poids minimum",
+  "FORM_DIAGNOSTIC_IDEAL": "Poids idéal",
+  "FORM_DIAGNOSTIC_BUTTON": "Envoyer",
+  "FORM_DIAGNOSTIC_WARNING_TITLE": "Attention",
+  "FORM_DIAGNOSTIC_WARNING_SUBTITLE": "Assurez-vous d'avoir complété tous les champs avant d'envoyer votre diagnostic",
 
-  "TUTORIAL_SLIDE2_TITLE": "Comment utiliser le Super Starter",
-  "TUTORIAL_SLIDE2_DESCRIPTION": "Assemblez les types de pages désirés et supprimez les autres. Le kit inclut plusieurs mises en page courantes d’applications mobiles, comme les pages de connexion et d’inscription, les onglets et cette page de tutoriel.",
+  "ITEM_DETAIL_TITLE": "Votre diagnostic",
+  "ITEM_DETAIL_BUTTON": "Enregistrer",
 
-  "TUTORIAL_SLIDE3_TITLE": "Pour commencer",
-  "TUTORIAL_SLIDE3_DESCRIPTION": "Si vous avez besoin d’aide, consultez le README du Super Starter pour un tutoriel complet.",
-
-  "SETTINGS_TITLE": "Paramètres",
-  "SETTINGS_OPTION1": "Option 1",
-  "SETTINGS_OPTION2": "Option 2",
-  "SETTINGS_OPTION3": "Option 3",
-  "SETTINGS_OPTION4": "Option 4",
-
-  "SETTINGS_PAGE_PROFILE": "Modifier le profil",
-
-  "WELCOME_TITLE": "Bienvenue",
-
-  "LOGIN_TITLE": "Connexion",
-  "LOGIN_ERROR": "Connexion impossible. Veuillez vérifier les informations de votre compte et réessayer.",
-  "LOGIN_BUTTON": "Connexion",
-  "SIGNUP_TITLE": "Inscription",
-  "SIGNUP_ERROR": "Inscription impossible. Veuillez vérifier les informations de votre compte et réessayer.",
-  "SIGNUP_BUTTON": "Inscription",
-
-  "LIST_MASTER_TITLE": "Items",
-
-  "ITEM_CREATE_TITLE": "Nouvel item",
-  "ITEM_CREATE_CHOOSE_IMAGE": "Ajouter une image",
-
-  "CARDS_TITLE": "Social",
-
-  "SEARCH_TITLE": "Recherche"
+  "DONE_BUTTON": "Valider",
+  "CANCEL_BUTTON": "Annuler",
+  "DELETE_BUTTON": "Supprimer"
 }
