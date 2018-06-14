@@ -22,12 +22,12 @@ export class DetailPage implements OnInit {
   }
 
   isStored() {
-    return this.diagnosticService.getDiagnostic(this.diagnostic)
+    return this.diagnosticService.getDiagnostic(this.diagnostic);
   }
 
   saveDiagnostic () {
-    this.diagnosticService.save(this.diagnostic)
-    this.navCtrl.push('ListPage')
+    this.diagnosticService.save(this.diagnostic);
+    this.navCtrl.push('ListPage');
   }
 
 }
