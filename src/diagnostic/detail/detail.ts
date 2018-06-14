@@ -26,7 +26,7 @@ export class DetailPage implements OnInit {
   }
 
   saveDiagnostic () {
-    this.diagnosticService.save(this.diagnostic)
+    this.diagnosticService.saveDiagnostic(this.diagnostic)
     this.navCtrl.push('ListPage')
   }
 

@@ -120,7 +120,7 @@ export class DiagnosticService {
     return new Diagnostic(this.getNextId(), null, null, null, null, null);
   }
 
-  save(diagnostic: Diagnostic) {
+  saveDiagnostic(diagnostic: Diagnostic) {
     this.diagnostics.push(diagnostic);
     return diagnostic;
   }
