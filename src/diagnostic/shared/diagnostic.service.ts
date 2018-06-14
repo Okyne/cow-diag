@@ -40,7 +40,7 @@ export class DiagnosticService {
     ];
 
     for (let diagnostic of diagnostics) {
-      this.diagnostics.push(new Diagnostic(diagnostic.id, diagnostic.count, diagnostic.min, diagnostic.max, diagnostic.ideal));
+      this.diagnostics.push(new Diagnostic(diagnostic.id, diagnostic.count, diagnostic.min, diagnostic.max, diagnostic.ideal, diagnostic.cows));
     }
   }
 
@@ -51,7 +51,7 @@ export class DiagnosticService {
     return this.diagnostics;
   }
 
-  generateCows(diagnostic) {
+  generateCows(diagnostic: Diagnostic) {
     for (let i = 0; i < diagnostic.count; i++) {
       diagnostic.cows.push(Math.floor(Math.random()*(diagnostic.max - diagnostic.min + 1) + diagnostic.min));
     }
@@ -71,25 +71,23 @@ export class DiagnosticService {
         labelUnder = label;
       }
     )
-    return function (diagnostic) {
+    return function (diagnostic: Diagnostic) {
       let overweighted = _.filter(diagnostic.cows, function(weight) {
           if (weight > diagnostic.ideal) return weight;
         }).length;
       chartData.push({
-        label: labelOver + diagnostic.ideal,
+        label: labelOver + diagnostic.ideal + ' kg',
         value: overweighted,
-        color: '#c30436'
       })
       chartData.push({
-        label: labelUnder + diagnostic.ideal,
+        label: labelUnder + diagnostic.ideal + ' kg',
         value: diagnostic.cows.length - overweighted,
-        color: '#576065'
       })
       return chartData;
     }
   }
 
-  getDiagnostic(diagnostic) {
+  getDiagnostic(diagnostic: Diagnostic) {
     let id = diagnostic && diagnostic.id || diagnostic;
     return _.findWhere(this.diagnostics, {id: id});
   }
@@ -119,10 +117,11 @@ export class DiagnosticService {
   }
 
   initializeDiagnostic() {
-    return new Diagnostic(this.getNextId(), null, null, null, null);
+    return new Diagnostic(this.getNextId(), null, null, null, null, null);
   }
 
   save(diagnostic: Diagnostic) {
     this.diagnostics.push(diagnostic);
+    return diagnostic;
   }
 }

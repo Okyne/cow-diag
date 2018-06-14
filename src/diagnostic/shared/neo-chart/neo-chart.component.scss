@@ -1,21 +1,11 @@
-//neo-chart {
-//  max-width: 56px;
-//  height: 56px;
-//
-//  .neo-chart-container {
-//    display: block;
-//    max-width: 56px;
-//    height: 56px;
-//  }
-//  div:not(.large) {
-//    canvas {
-//      height: 40px !important;
-//      width: 80px !important;
-//      position: absolute;
-//      top: 50%;
-//      left: 50%;
-//      transform: translate3d(-50%,-50%,0);
-//    }
-//  }
-//}
+neo-chart {
+  div.large {
+    canvas {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      @include transform(translate3d(-50%,-50%,0));
+    }
+  }
+}
 

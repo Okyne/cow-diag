@@ -1,34 +1,54 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, AfterContentInit, ElementRef } from '@angular/core';
 import * as _ from 'underscore';
+import Chart from 'chart.js';
 
 import { Diagnostic } from '../../shared/diagnostic.model';
 import { DiagnosticService } from '../../shared/diagnostic.service';
 
 @Component({
   selector: 'neo-chart',
-  template: `<div [class]="(format ? 'large' : '') + 'neo-chart-container'">
-    <canvas baseChart
-            [data]="donutChartData"
-            [labels]="donutChartLabels"
-            [chartType]="donutChartType"></canvas>
-  </div>`
+  template: `<div [style.width.px]="svgWidth" [style.height.px]="svgHeight" [class]="format ? 'large': ''">
+      <canvas></canvas>
+    </div>`
 })
-export class NeoChartComponent implements OnInit {
+export class NeoChartComponent implements AfterContentInit {
   @Input() diagnostic: Diagnostic;
   @Input() format: any;
 
+  chart: any;
   svgWidth: number;
   svgHeight: number;
-  donutChartData: any[];
-  donutChartLabels: any[];
-  donutChartType: string;
 
-  constructor(public diagnosticService: DiagnosticService) {}
+  constructor(public element: ElementRef, public diagnosticService: DiagnosticService) {}
 
-  ngOnInit(): void {
+  ngAfterContentInit(): void {
     this.svgWidth = this.svgHeight = this.format == 'large' ? 250 : 50;
-    this.donutChartData = _.map(this.diagnosticService.getChartData([])(this.diagnostic), 'value');
-    this.donutChartLabels = _.map(this.diagnosticService.getChartData([])(this.diagnostic), 'label');
-    this.donutChartType = 'doughnut';
+    this.chart = new Chart(this.element.nativeElement.querySelector('canvas'), {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          data: _.map(this.diagnosticService.getChartData([])(this.diagnostic), 'value'),
+          backgroundColor: [
+            '#c30436',
+            '#576065'
+          ]
+        }],
+        labels: _.map(this.diagnosticService.getChartData([])(this.diagnostic), 'label')
+      },
+        options: {
+          legend: {
+            display: this.format ? true : false,
+            position: 'bottom',
+            labels: {
+              fontColor: '#000'
+            }
+          },
+          maintainAspectRatio : false
+        }
+    });
+  }
+
+  ngOnDestroy() {
+    this.chart.destroy();
   }
 }

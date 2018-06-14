@@ -21,6 +21,10 @@ export class DetailPage implements OnInit {
     if (this.diagnostic && !this.diagnostic.cows.length) this.diagnosticService.generateCows(this.diagnostic);
   }
 
+  isStored() {
+    return this.diagnosticService.getDiagnostic(this.diagnostic)
+  }
+
   saveDiagnostic () {
     this.diagnosticService.save(this.diagnostic)
     this.navCtrl.push('ListPage')

@@ -12,6 +12,7 @@
   <ion-toolbar color="primary">
     <button title="{{ 'ITEM_DETAIL_BUTTON' | translate }}"
        (click)="saveDiagnostic()"
+       [disabled]="isStored()"
        class="button button-md button-default button-default-md button-full button-full-md">{{ 'ITEM_DETAIL_BUTTON' | translate }}</button>
   </ion-toolbar>
 </ion-footer>

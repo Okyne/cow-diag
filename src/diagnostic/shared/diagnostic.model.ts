@@ -8,10 +8,10 @@ export class Diagnostic {
   min: number
   max: number
 
-  constructor(id, count, min, max, ideal) {
+  constructor(id, count, min, max, ideal, cow) {
     this.date = new Date()
     this.count = count
-    this.cows = []
+    this.cows = cow || []
     this.id = id
     this.ideal = ideal
     this.min = min
