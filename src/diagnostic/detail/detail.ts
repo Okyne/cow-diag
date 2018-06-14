@@ -22,7 +22,7 @@ export class DetailPage implements OnInit {
   }
 
   isStored() {
-    return this.diagnosticService.getDiagnostic(this.diagnostic)
+    return this.diagnosticService.getDiagnostic(this.diagnostic);
   }
 
   saveDiagnostic () {
